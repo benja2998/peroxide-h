@@ -100,6 +100,65 @@ static inline void px_print(const char *format, ...)
 	}
 
 	va_end(args);
+#elif defined(_WIN32) || defined(_WIN64)
+	va_list args;
+	va_start(args, format);
+
+	HANDLE stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	char   buffer[1024];
+	size_t i = 0;
+
+	char ch;
+	while ((ch = *format++) != '\0' && i < sizeof(buffer) - 1)
+	{
+		if (ch == '%' && *format != '\0')
+		{
+			switch (*format++)
+			{
+				case 's':
+				{
+					const char *str = va_arg(args, const char *);
+					if (str)
+					{
+						while (*str && i < sizeof(buffer) - 1)
+						{
+							buffer[i++] = *str++;
+						}
+					}
+					break;
+				}
+				case 'd':
+				{
+					int   num = va_arg(args, int);
+					char *str = px_itoa(num);
+					if (str)
+					{
+						const char *p = str;
+						while (*p && i < sizeof(buffer) - 1)
+						{
+							buffer[i++] = *p++;
+						}
+						px_free(str);
+					}
+					break;
+				}
+				default:
+					buffer[i++] = ch;
+					break;
+			}
+		}
+		else
+		{
+			buffer[i++] = ch;
+		}
+	}
+
+	buffer[i] = '\0'; // Null-terminate the buffer
+
+	DWORD written;
+	WriteFile(stdoutHandle, buffer, (DWORD)i, &written, NULL);
+
+	va_end(args);
 #endif
 }
 
