@@ -1,0 +1,10 @@
+*.pch
+*.out
+*.exe
+*.app
+*.dSYM
+*.o
+*.so
+*.dylib
+*.a
+*.dll
