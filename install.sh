@@ -33,8 +33,9 @@ else
 
 	# Move ./src/peroxide.h to /usr/local/include/peroxide.h
 	if [[ -f "src/peroxide.h" ]]; then
-		mkdir -p /usr/local/include
-		cp src/peroxide.h /usr/local/include/peroxide.h
+		mkdir -p /usr/include
+
+		cp src/peroxide.h /usr/include/peroxide.h
 	else
 		echo "Error: src/peroxide.h not found. Did you run this script from the correct directory?"
 		exit 1
