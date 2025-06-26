@@ -10,17 +10,16 @@ To install peroxide-h, you can use the following command:
 ./install.sh
 ```
 
-Windows and macOS support is not available yet.
+For Windows*:
+
+```powershell
+.\install.bat
+```
+
+*Visit [this link](https://go.microsoft.com/fwlink/?linkid=2320455) to get the Windows SDK, as this uses the include directory in the Windows SDK directory.
+
+There is no macOS support.
 
 ## Usage
 
-### Printing to the console
-
-```c
-#include <peroxide.h>
-
-int main() {
-    px_print("Hello, World!\n");
-    return 0;
-}
-```
+Add `#include <peroxide.h>` to your C or C++ file.
