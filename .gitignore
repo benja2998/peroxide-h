@@ -8,3 +8,4 @@
 *.dylib
 *.a
 *.dll
+*.obj
