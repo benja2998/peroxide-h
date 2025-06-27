@@ -23,3 +23,5 @@ There is no macOS support.
 ## Usage
 
 Add `#include <peroxide.h>` to your C or C++ file.
+
+You can also test it by compiling and running usage.c in the src directory.

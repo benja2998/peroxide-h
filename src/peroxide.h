@@ -1,5 +1,6 @@
 /*
- * peroxide-h is meant to be a safer C library that is more comfortable for C devs to work with than switching to Rust.
+ * peroxide-h is meant to be a safer C library that is more comfortable for C
+ * devs to work with than switching to Rust.
  */
 
 #ifndef PEROXIDE_H
@@ -8,34 +9,44 @@
 // Implement necessary libs for system calls
 
 #ifdef __linux__
-#include <stdarg.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
+#	include <stdarg.h>
+#	include <stdlib.h>
+#	include <sys/stat.h>
+#	include <sys/types.h>
+#	include <unistd.h>
 #elif defined(_WIN32) || defined(_WIN64)
-#include <windows.h> // Microsoft does not want to use consistent syscalls, so we will use windows.h
+#	include <windows.h> // Microsoft does not want to use consistent syscalls, so we will use windows.h
 #else
-#include <stdio.h>
-int main()
+#	include <stdio.h>
+int
+main()
 {
 	printf("Unsupported platform. Please use Linux or Windows.\n");
 	return 1; // Exit with an error code
 }
 #endif
 
-static inline char  *px_itoa(int number);
-static inline void   px_free(void *ptr);
-static inline size_t px_strlen(const char *str);
-static inline void   px_print(const char *format, ...);
-static inline size_t px_intlen(int number);
-static inline void  *px_malloc(size_t size);
-static inline int    px_atoi(const char *str);
-static inline char  *px_strcpy(char *destination, const char *source, size_t dest_capacity);
+static inline char*
+px_itoa(int number);
+static inline void
+px_free(void* ptr);
+static inline size_t
+px_strlen(const char* str);
+static inline void
+px_print(const char* format, ...);
+static inline size_t
+px_intlen(int number);
+static inline void*
+px_malloc(size_t size);
+static inline int
+px_atoi(const char* str);
+static inline char*
+px_strcpy(char* destination, const char* source, size_t dest_capacity);
 
 // Implement px_strlen
 
-static inline size_t px_strlen(const char *str)
+static inline size_t
+px_strlen(const char* str)
 {
 	if (str == NULL)
 	{
@@ -52,7 +63,8 @@ static inline size_t px_strlen(const char *str)
 
 // Implement px_print
 
-static inline void px_print(const char *format, ...)
+static inline void
+px_print(const char* format, ...)
 {
 	if (format == NULL)
 	{
@@ -72,7 +84,7 @@ static inline void px_print(const char *format, ...)
 			{
 				case 's':
 				{
-					const char *str = va_arg(args, const char *);
+					const char* str = va_arg(args, const char*);
 					if (str)
 						write(STDOUT_FILENO, str, px_strlen(str));
 					break;
@@ -80,7 +92,7 @@ static inline void px_print(const char *format, ...)
 				case 'd':
 				{
 					int   num = va_arg(args, int);
-					char *str = px_itoa(num);
+					char* str = px_itoa(num);
 					if (str)
 					{
 						write(STDOUT_FILENO, str, px_strlen(str));
@@ -117,7 +129,7 @@ static inline void px_print(const char *format, ...)
 			{
 				case 's':
 				{
-					const char *str = va_arg(args, const char *);
+					const char* str = va_arg(args, const char*);
 					if (str)
 					{
 						while (*str && i < sizeof(buffer) - 1)
@@ -130,10 +142,10 @@ static inline void px_print(const char *format, ...)
 				case 'd':
 				{
 					int   num = va_arg(args, int);
-					char *str = px_itoa(num);
+					char* str = px_itoa(num);
 					if (str)
 					{
-						const char *p = str;
+						const char* p = str;
 						while (*p && i < sizeof(buffer) - 1)
 						{
 							buffer[i++] = *p++;
@@ -164,7 +176,8 @@ static inline void px_print(const char *format, ...)
 
 // Implement px_intlen
 
-static inline size_t px_intlen(int number)
+static inline size_t
+px_intlen(int number)
 {
 	size_t length = 0;
 
@@ -185,14 +198,15 @@ static inline size_t px_intlen(int number)
 
 // Implement px_malloc
 
-static inline void *px_malloc(size_t size)
+static inline void*
+px_malloc(size_t size)
 {
 	if (size == 0)
 	{
 		return NULL; // Handle zero allocation
 	}
 
-	void *ptr = malloc(size);
+	void* ptr = malloc(size);
 	if (ptr == NULL)
 	{
 		px_print("Memory allocation failed\n");
@@ -204,7 +218,8 @@ static inline void *px_malloc(size_t size)
 
 // Implement px_atoi
 
-static inline int px_atoi(const char *str)
+static inline int
+px_atoi(const char* str)
 {
 	if (str == NULL || *str == '\0')
 	{
@@ -243,13 +258,14 @@ static inline int px_atoi(const char *str)
 
 // Implement px_itoa
 
-static inline char *px_itoa(int number)
+static inline char*
+px_itoa(int number)
 {
 	// Convert each digit to a character
 
 	size_t length = px_intlen(number);
 
-	char *buffer = (char *)px_malloc(length + 1); // +1 for null terminator
+	char* buffer = (char*)px_malloc(length + 1); // +1 for null terminator
 	if (buffer == NULL)
 	{
 		return NULL; // Handle memory allocation failure
@@ -277,7 +293,8 @@ static inline char *px_itoa(int number)
 
 // Implement px_free
 
-static inline void px_free(void *ptr)
+static inline void
+px_free(void* ptr)
 {
 	if (ptr == NULL)
 	{
@@ -289,7 +306,8 @@ static inline void px_free(void *ptr)
 
 // Implement px_strcpy
 
-static inline char *px_strcpy(char *destination, const char *source, size_t dest_capacity)
+static inline char*
+px_strcpy(char* destination, const char* source, size_t dest_capacity)
 {
 	if (destination == NULL || source == NULL || dest_capacity == 0)
 	{
