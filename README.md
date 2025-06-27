@@ -4,7 +4,7 @@
 
 ## Installation
 
-To install peroxide-h, you can use the following command:
+To install [peroxide-h](https://github.com/benja2998/peroxide-h), you can use the following command:
 
 ```bash
 ./install.sh
