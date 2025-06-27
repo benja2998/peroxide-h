@@ -10,13 +10,11 @@ To install peroxide-h, you can use the following command:
 ./install.sh
 ```
 
-For Windows*:
+For Windows (requires installing the [Windows SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)):
 
 ```powershell
 .\install.bat
 ```
-
-*Visit [this link](https://go.microsoft.com/fwlink/?linkid=2320455) to get the Windows SDK, as this uses the include directory in the Windows SDK directory.
 
 There is no macOS support.
 
