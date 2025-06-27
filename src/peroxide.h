@@ -1,5 +1,5 @@
 /*
- * peroxide-h is a safer C library for C programming language.
+ * peroxide-h is meant to be a safer C library that is more comfortable for C devs to work with than switching to Rust.
  */
 
 #ifndef PEROXIDE_H

@@ -1,6 +1,6 @@
 # peroxide-h
 
-peroxide-h is meant to be a safer C library that is more comfortable to work with than Rust lang.
+peroxide-h is meant to be a safer C library that is more comfortable for C devs to work with than switching to Rust.
 
 ## Installation
 
