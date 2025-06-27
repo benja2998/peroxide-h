@@ -1,15 +1,11 @@
-#include <peroxide.h>
-/*
- * Since this is using a relative path, you need to run either install.bat or
- * install.sh before running this code.
- */
+#include "./peroxide.h"
 
 int
 main(void)
 {
 	px_print("Hello, World!\n");
 
-	px_print("This is a simple example of using the Peroxide library.\n");
+	px_print("This is a simple example of using the peroxide-h library.\n");
 
 	const char* string = "string";
 
@@ -24,7 +20,7 @@ main(void)
 	px_print(length_str);
 	px_print("\n");
 
-	// Use px_strcopy to copy string to a new buffer
+	// Use px_strcpy to copy string to a new buffer
 
 	char buff[4];
 
